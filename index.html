@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RE/MAX Placencia - Belize Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --primary-red: #CC0000;
+            --primary-blue: #0054A4; /* RE/MAX Blue */
+            --dark-gray: #141a2d;
+            --light-gray-bg: #f4f4f4;
+            --white: #fff;
+            --border-color: #ddd;
+        }
+        /* --- General Body & Typography --- */
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray-bg);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        header img {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .nav-toggle {
+            display: none; /* Hidden on desktop */
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+        }
+        nav {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 10px 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            color: var(--white);
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: url('https://www.remaxplacencia.com/wp-content/uploads/2022/08/Placencia-Peninsula-REMAX-1.jpg') no-repeat center center;
+            background-size: cover;
+            color: var(--white);
+            padding: 120px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 450px; /* Adjust as needed */
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+        }
+
+        .hero > * {
+            position: relative; /* Ensure content is above overlay */
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .search-bar {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .search-bar input {
+            padding: 12px 15px;
+            width: 70%;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .search-bar button {
+            padding: 12px 25px;
+            background-color: var(--primary-red);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .search-bar button:hover {
+            background-color: #a30000;
+        }
+
+        /* --- Page Sections & Layout --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            color: var(--primary-blue); /* Using blue for headings */
+        }
+
+        /* --- Featured Properties Slider --- */
+        .slider-container {
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0; /* Padding no longer needed here */
+        }
+
+        .property-listings {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 25px; /* Gap between cards */
+            flex-wrap: nowrap; /* Ensure items stay in a single line */
+            cursor: pointer;
+        }
+
+        .property-card {
+            flex: 0 0 calc(25% - 18.75px); /* 4 cards per row with 25px gap */
+            /* Calculation: (100% / 4) - (3 * gap / 4) = 25% - 18.75px */
+        }
+
+        .property-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 320px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .property-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for images */
+            object-fit: cover; /* Ensure images cover the area */
+            display: block;
+        }
+
+        .property-card-content {
+            padding: 18px;
+        }
+
+        .property-card-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+            text-align: left;
+        }
+
+        .property-card-content p {
+            margin: 5px 0;
+            font-size: 0.95em;
+            color: #555;
+            text-align: left;
+        }
+
+        .property-card-content p:first-of-type {
+            font-weight: 700;
+            color: var(--primary-red);
+            font-size: 1.1em;
+        }
+
+        /* --- Discover Belize Tabs --- */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tab-link {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            color: var(--dark-gray);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .tab-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-red);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tab-link.active, .tab-link:hover {
+            color: var(--primary-red);
+        }
+
+        .tab-link.active::after {
+            transform: scaleX(1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* --- Modal (Popup Card) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-card {
+            background: var(--white);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header img {
+            max-height: 40px;
+        }
+
+        .modal-close {
+            font-size: 2em;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .modal-body {
+            display: flex;
+            padding: 20px;
+        }
+
+        .modal-image {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .modal-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .modal-details {
+            flex: 1;
+        }
+
+        .modal-details h3 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            color: var(--primary-blue);
+        }
+
+        .modal-details .price {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 15px;
+        }
+
+        /* --- Content Sections (About, Areas, Blog) --- */
+        .about-section, .areas-section, .blog-section {
+            background-color: var(--white);
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .about-section p, .areas-section p, .blog-section p {
+            max-width: 800px;
+            margin: 15px auto;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .about-section .team-members {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .about-section .team-member {
+            width: 200px;
+            text-align: center;
+        }
+
+        .about-section .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid var(--primary-red);
+        }
+
+        .about-section .team-member h4 {
+            margin: 5px 0;
+            color: var(--dark-gray);
+        }
+
+        .about-section .team-member p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .area-card {
+            background-color: var(--light-gray-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .area-card:hover {
+            background-color: #e0e0e0;
+        }
+
+        .area-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-blue); /* Using blue for area headings */
+            margin-bottom: 10px;
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .blog-post-card {
+            background-color: var(--light-gray-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .blog-post-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-gray);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .blog-post-card p {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .blog-post-card a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .themed-button {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .themed-button:hover {
+            background-color: #a30000;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            gap: 20px;
+        }
+
+        footer .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        footer .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-red);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        footer .footer-section p,
+        footer .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-section a:hover {
+            color: var(--primary-red);
+        }
+
+        footer .social-links a {
+            display: inline-block;
+            margin: 0 8px;
+            font-size: 1.5em;
+            color: var(--white);
+        }
+
+        footer .copyright {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 15px;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 992px) {
+            .property-card {
+                flex: 0 0 calc(33.333% - 17px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block; /* Show hamburger */
+                position: absolute;
+                right: 20px;
+                top: 25px;
+                z-index: 1001; /* Above nav */
+                color: var(--primary-blue);
+            }
+
+            nav {
+                padding: 0;
+            }
+
+            .nav-links {
+                display: none; /* Hide nav links by default */
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--primary-blue);
+                padding: 20px 0;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when active */
+            }
+
+            nav a {
+                margin: 10px 0;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-bar input, .search-bar button {
+                width: 90%;
+            }
+
+            .slider-container {
+                overflow-x: auto; /* Enable horizontal scrolling */
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                padding-bottom: 15px; /* Space for scrollbar */
+            }
+
+            .property-listings {
+                justify-content: flex-start; /* Align cards to the start */
+                cursor: grab;
+            }
+
+            .property-card {
+                flex: 0 0 80%; /* Each card takes up 80% of the viewport */
+                max-width: 300px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+            .tab-link {
+                font-size: 1.1em;
+                padding: 10px 15px;
+            }
+
+            .modal-body {
+                flex-direction: column;
+            }
+            .modal-image {
+                padding-right: 0;
+                padding-bottom: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/logo.avif" alt="RE/MAX Placencia Logo" style="max-height: 70px;">
+</header>
+
+<nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="properties.html">PROPERTIES</a></li>
+        <li><a href="developments.html">DEVELOPMENTS</a></li>
+        <li><a href="buying.html">BUYING IN BELIZE</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="blog.html">BLOG</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <h1>Your Placencia, Belize Real Estate Experts</h1>
+    <div class="search-bar">
+        <input type="text" placeholder="Search for properties...">
+        <button>Search</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="featured-section">
+        <h2>Featured Properties</h2>
+        <div class="slider-container">
+            <div class="property-listings">
+                <div class="property-card">
+                    <img src="https://www.remaxplacencia.com/wp-content/uploads/2024/02/The-Villas-at-Cocoplum-Lot-1-1-scaled.jpg" alt="The Villas at Cocoplum">
+                    <div class="property-card-content" data-location="Placencia, Belize">
+                        <h3>The Villas at Cocoplum | Lot 1</h3>
+                        <p>$1,200,000</p>
+                        <p>An exquisite beachfront property in a premier community.</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/11/Rum-Point-Verandah-Home-1-scaled.jpg" alt="Rum Point Verandah Home">
+                    <div class="property-card-content" data-location="Rum Point, Belize">
+                        <h3>Rum Point Verandah Home</h3>
+                        <p>$995,000</p>
+                        <p>3 Bedrooms, 2 Bathrooms, Private Pool</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/09/Swan-Villas-Placencia-1-scaled.jpg" alt="Swan Villas">
+                    <div class="property-card-content" data-location="Placencia, Belize">
+                        <h3>Swan Villas | Placencia</h3>
+                        <p>$799,000</p>
+                        <p>Unique over-the-water villas with stunning views.</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/08/Cocoplum-Lot-70-1-scaled.jpg" alt="Cocoplum Lot 70">
+                    <div class="property-card-content" data-location="Cocoplum, Belize">
+                        <h3>Cocoplum Lot 70</h3>
+                        <p>$350,000</p>
+                        <p>A prime lot in the coveted Cocoplum development.</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/08/Vista-Cove-Placencia-1-scaled.jpg" alt="Vista Cove Condos">
+                    <div class="property-card-content" data-location="Placencia, Belize">
+                        <h3>Vista Cove Condos | Placencia</h3>
+                        <p>$299,000</p>
+                        <p>Modern condos with lagoon access and amenities.</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/08/The-Residences-Placencia-1-scaled.jpg" alt="The Residences">
+                    <div class="property-card-content" data-location="Placencia, Belize">
+                        <h3>The Residences | Placencia</h3>
+                        <p>$279,000</p>
+                        <p>Luxury living with resort-style pools and marina.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="about-section">
+    <div class="container">
+        <h2>Meet Our Agent</h2>
+        <p>Your premier real estate professional in Placencia, Belize, dedicated to providing you with the best service and expertise for all your real estate needs in this beautiful country.</p>
+        <div class="team-members">
+            <div class="team-member">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/08/Addison-Rennie-REMAX-Placencia-Belize.png" alt="Addison Rennie">
+                <h4>Addison Rennie</h4>
+                <p>Real Estate Professional</p>
+            </div>
+        </div>
+        <a href="about.html" class="themed-button">About Our Team</a>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div class="modal-overlay" id="listing-modal">
+    <div class="modal-card">
+        <div class="modal-header">
+            <img src="images/logo.avif" alt="RE/MAX Logo">
+            <button class="modal-close" id="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img src="" alt="Property Image" id="modal-img">
+            </div>
+            <div class="modal-details" id="modal-details">
+                <!-- Content will be injected by JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="areas-section">
+    <div class="container">
+        <h2>Discover Belize</h2>
+        <div class="tabs">
+            <button class="tab-link active" data-tab="placencia">Placencia</button>
+            <button class="tab-link" data-tab="ambergris">Ambergris Caye</button>
+            <button class="tab-link" data-tab="cayo">Cayo District</button>
+            <button class="tab-link" data-tab="hopkins">Hopkins</button>
+        </div>
+
+        <div class="tab-content-wrapper">
+            <div id="placencia" class="tab-content active">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2022/08/Placencia-Peninsula-REMAX-1.jpg" alt="Placencia Beach">
+                <p>Originally a quiet fishing community settled by the English in the 17th century, Placencia has blossomed into a premier eco-tourism destination. [1, 12, 16] Its name, meaning "Pleasant Point," was given by Spanish travelers. [1, 12] Today, it's known for its 16 miles of natural sandy beaches, a vibrant local culture, and the world's narrowest main street. [1, 19]</p>
+                <a href="#" class="themed-button">Learn More</a>
+            </div>
+            <div id="ambergris" class="tab-content">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2022/08/Ambergris-Caye-REMAX-Belize.png" alt="Ambergris Caye">
+                <p>As Belize's largest island, Ambergris Caye has a rich history dating back to the Maya civilization. [18, 5] Once a hub for European pirates and whalers, it's now a top tourist mecca, famous for its proximity to the Belize Barrier Reef, a UNESCO World Heritage Site. [3, 9] The island's only town, San Pedro, has transitioned from a sleepy fishing village to a bustling center with a casual beach-life vibe and upscale amenities. [5, 4]</p>
+                <a href="#" class="themed-button">Learn More</a>
+            </div>
+            <div id="cayo" class="tab-content">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2022/08/Cayo-District-REMAX-Belize.png" alt="Cayo District Jungle">
+                <p>Often called the "Wild West" of Belize, the Cayo District is the country's agricultural heartland and a hub for adventure and ecotourism. [27] This region teems with wildlife in pristine rainforests and is home to over 600 ancient Mayan sites, including the magnificent cities of Caracol and Xunantunich. [26, 24] Its cultural hub, San Ignacio Town, is a vibrant mix of cultures, from Maya and Mestizo to Mennonite and Creole communities. [27, 23]</p>
+                <a href="#" class="themed-button">Learn More</a>
+            </div>
+            <div id="hopkins" class="tab-content">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2022/08/Hopkins-REMAX-Belize.png" alt="Hopkins Village">
+                <p>Considered the cultural center of the Garifuna population in Belize, Hopkins is a friendly fishing village on the southern coast. [11, 10] Founded by Garifuna settlers in the early 19th century, the village maintains a proud Afro-Caribbean heritage, sharing its legacy through food, dance, and the powerful sound of drumming that often fills the air. [2, 7] Its five miles of sandy beaches and laid-back vibe make it an ideal base for exploring both the barrier reef and nearby jungle sanctuaries. [13, 15]</p>
+                <a href="#" class="themed-button">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="blog-section">
+        <h2>Latest from Our Blog</h2>
+        <div class="blog-posts">
+            <div class="blog-post-card">
+                <h3>Belize's Real Estate Market Update</h3>
+                <p>An inside look at the latest trends and opportunities in the Belize property market.</p>
+                <a href="blog.html" class="themed-button">Read More</a>
+            </div>
+            <div class="blog-post-card">
+                <h3>Top 5 Reasons to Retire in Placencia</h3>
+                <p>Discover why Placencia is becoming a top destination for retirees worldwide.</p>
+                <a href="blog.html" class="themed-button">Read More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section contact-info">
+            <h3>CONTACT US</h3>
+            <p>Placencia, Belize</p>
+            <p>+501-616-2978</p>
+            <p>addison@remaxvipbelize.com</p>
+        </div>
+        <div class="footer-section quick-links">
+            <h3>QUICK LINKS</h3>
+            <a href="properties.html">Properties</a>
+            <a href="developments.html">Developments</a>
+            <a href="about.html">Our Team</a>
+            <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-section social-links">
+            <h3>FOLLOW US</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </div>
+    <p class="copyright">© 2024. All rights reserved.</p>
+</footer>
+
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // --- Featured Properties Slider (Desktop) ---
+        const slider = document.querySelector('.property-listings');
+        const slides = Array.from(slider.querySelectorAll('.property-card'));
+        let sliderInterval;
+
+        function initializeSlider() {
+            // Only run the slider JS on screens wider than 768px
+            if (window.innerWidth > 768) {
+                let currentIndex = 0;
+                const cardsPerPage = 4;
+                const cardWidth = slides.length > 0 ? slides[0].offsetWidth : 0;
+                const gap = 25;
+                const itemToShiftBy = cardWidth + gap;
+
+                function updateSliderPosition() {
+                    if (slider) {
+                        slider.style.transform = `translateX(-${currentIndex * itemToShiftBy}px)`;
+                    }
+                }
+
+                function moveToNextSlide() {
+                    if (slides.length > cardsPerPage) {
+                        currentIndex++;
+                        if (currentIndex > slides.length - cardsPerPage) {
+                            currentIndex = 0;
+                        }
+                        updateSliderPosition();
+                    }
+                }
+
+                // Clear any existing interval before setting a new one
+                if (sliderInterval) {
+                    clearInterval(sliderInterval);
+                }
+                sliderInterval = setInterval(moveToNextSlide, 5000);
+            } else {
+                // On mobile, clear the interval and reset the transform
+                if (sliderInterval) {
+                    clearInterval(sliderInterval);
+                }
+                if (slider) {
+                    slider.style.transform = 'translateX(0px)';
+                }
+            }
+        }
+
+        // --- Listing Modal (Popup) Logic ---
+        const modalOverlay = document.getElementById('listing-modal');
+        const modalClose = document.getElementById('modal-close');
+        const modalImg = document.getElementById('modal-img');
+        const modalDetails = document.getElementById('modal-details');
+
+        slides.forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img').src;
+                const content = card.querySelector('.property-card-content');
+                const title = content.querySelector('h3').innerText;
+                const price = content.querySelector('p:first-of-type').innerText;
+                const desc = content.querySelector('p:last-of-type').innerText;
+                const location = content.dataset.location;
+
+                modalImg.src = img;
+                modalDetails.innerHTML = `
+                    <h3>${title}</h3>
+                    <p class="price">${price}</p>
+                    <p><strong>Location:</strong> ${location}</p>
+                    <p>${desc}</p>
+                    <a href="contact.html" class="themed-button">Contact Agent</a>
+                `;
+                modalOverlay.classList.add('active');
+            });
+        });
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        // --- Mobile Navigation Toggle ---
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // --- Initialize and handle resize ---
+        initializeSlider(); // Run on initial load
+        window.addEventListener('resize', initializeSlider); // Re-run on window resize
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.tab-link');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Deactivate all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // Activate the clicked tab and corresponding content
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-tab');
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developments - RE/MAX Placencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --primary-red: #CC0000;
+            --primary-blue: #0054A4; /* RE/MAX Blue */
+            --dark-gray: #141a2d;
+            --light-gray-bg: #f4f4f4;
+            --white: #fff;
+            --border-color: #ddd;
+        }
+        /* --- General Body & Typography --- */
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray-bg);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        header img {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .nav-toggle {
+            display: none; /* Hidden on desktop */
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+        }
+        nav {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 10px 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            color: var(--white);
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        /* --- Page Sections & Layout --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            color: var(--primary-blue); /* Using blue for headings */
+        }
+
+        .content p {
+            text-align: center;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 15px auto;
+        }
+
+        .development-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .dev-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .dev-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dev-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .dev-card-content {
+            padding: 20px;
+        }
+
+        .dev-card-content h3 {
+            margin-top: 0;
+        }
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            gap: 20px;
+        }
+
+        footer .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        footer .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-red);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        footer .footer-section p,
+        footer .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-section a:hover {
+            color: var(--primary-red);
+        }
+
+        footer .social-links a {
+            display: inline-block;
+            margin: 0 8px;
+            font-size: 1.5em;
+            color: var(--white);
+        }
+
+        footer .copyright {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 15px;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block; /* Show hamburger */
+                position: absolute;
+                right: 20px;
+                top: 25px;
+                z-index: 1001; /* Above nav */
+                color: var(--primary-blue);
+            }
+
+            nav {
+                padding: 0;
+            }
+
+            .nav-links {
+                display: none; /* Hide nav links by default */
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--primary-blue);
+                padding: 20px 0;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when active */
+            }
+
+            nav a {
+                margin: 10px 0;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/logo.avif" alt="RE/MAX Placencia Logo" style="max-height: 70px;">
+</header>
+
+<nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="properties.html">PROPERTIES</a></li>
+        <li><a href="developments.html">DEVELOPMENTS</a></li>
+        <li><a href="buying.html">BUYING IN BELIZE</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="blog.html">BLOG</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <section class="content">
+        <h2>Developments</h2>
+        <p>Explore the most exciting new development opportunities available in Placencia and greater Belize.</p>
+
+        <div class="development-grid">
+            <div class="dev-card">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/08/The-Residences-Placencia-1-scaled.jpg" alt="The Residences">
+                <div class="dev-card-content">
+                    <h3>The Residences, Placencia</h3>
+                    <p>Luxury resort-style living with marina access and premium amenities.</p>
+                </div>
+            </div>
+            <div class="dev-card">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/08/Cocoplum-Lot-70-1-scaled.jpg" alt="Cocoplum">
+                <div class="dev-card-content">
+                    <h3>Cocoplum, Placencia</h3>
+                    <p>An exclusive master-planned community with beachfront and canal lots.</p>
+                </div>
+            </div>
+            <div class="dev-card">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/09/Swan-Villas-Placencia-1-scaled.jpg" alt="Swan Villas">
+                <div class="dev-card-content">
+                    <h3>Swan Villas, Placencia</h3>
+                    <p>Unique over-the-water villas offering a one-of-a-kind living experience.</p>
+                </div>
+            </div>
+            <div class="dev-card">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/08/Vista-Cove-Placencia-1-scaled.jpg" alt="Vista Cove">
+                <div class="dev-card-content">
+                    <h3>Vista Cove, Placencia</h3>
+                    <p>Modern condominiums with stunning lagoon views and boat slips.</p>
+                </div>
+            </div>
+            <div class="dev-card">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2024/02/The-Villas-at-Cocoplum-Lot-1-1-scaled.jpg" alt="Villas at Cocoplum">
+                <div class="dev-card-content">
+                    <h3>The Villas at Cocoplum</h3>
+                    <p>Exquisite beachfront villas in a premier gated community.</p>
+                </div>
+            </div>
+            <div class="dev-card">
+                <img src="https://www.remaxplacencia.com/wp-content/uploads/2023/11/Rum-Point-Verandah-Home-1-scaled.jpg" alt="Rum Point Estates">
+                <div class="dev-card-content">
+                    <h3>Rum Point Estates</h3>
+                    <p>A tranquil and private development offering spacious lots and homes.</p>
+                </div>
+            </div>
+            <!-- Add two more for 8 total -->
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section contact-info">
+            <h3>CONTACT US</h3><p>Placencia, Belize</p><p>+501-616-2978</p><p>addison@remaxvipbelize.com</p>
+        </div>
+        <div class="footer-section quick-links">
+            <h3>QUICK LINKS</h3>
+            <a href="properties.html">Properties</a>
+            <a href="developments.html">Developments</a>
+            <a href="about.html">Our Team</a>
+            <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-section social-links">
+            <h3>FOLLOW US</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </div>
+    <p class="copyright">© 2024. All rights reserved.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    });
+</script>
+
+</body>
+</html>
